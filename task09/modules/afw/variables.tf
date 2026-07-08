@@ -41,13 +41,11 @@ variable "fw_public_ip_name" {
 variable "fw_sku_name" {
   description = "Azure Firewall SKU name."
   type        = string
-  default     = "AZFW_VNet"
 }
 
 variable "fw_sku_tier" {
   description = "Azure Firewall SKU tier."
   type        = string
-  default     = "Standard"
 }
 
 variable "route_table_name" {
@@ -63,7 +61,6 @@ variable "default_route_name" {
 variable "route_address_prefix" {
   description = "Address prefix for the route that sends traffic to Azure Firewall."
   type        = string
-  default     = "0.0.0.0/0"
 }
 
 variable "application_rule_collection_name" {
@@ -74,19 +71,16 @@ variable "application_rule_collection_name" {
 variable "application_rule_collection_priority" {
   description = "Priority for the Azure Firewall application rule collection."
   type        = number
-  default     = 100
 }
 
 variable "application_rule_fqdn_tags" {
   description = "FQDN tags allowed by Azure Firewall application rules."
   type        = list(string)
-  default     = []
 }
 
 variable "application_rule_target_fqdns" {
   description = "Target FQDNs allowed by Azure Firewall application rules."
   type        = list(string)
-  default     = []
 }
 
 variable "network_rule_collection_name" {
@@ -97,13 +91,11 @@ variable "network_rule_collection_name" {
 variable "network_rule_collection_priority" {
   description = "Priority for the Azure Firewall network rule collection."
   type        = number
-  default     = 110
 }
 
 variable "network_rule_destination_addresses" {
   description = "Destination addresses allowed by Azure Firewall network rules."
   type        = list(string)
-  default     = ["*"]
 }
 
 variable "nat_rule_collection_name" {
@@ -114,28 +106,24 @@ variable "nat_rule_collection_name" {
 variable "nat_rule_collection_priority" {
   description = "Priority for the Azure Firewall NAT rule collection."
   type        = number
-  default     = 120
 }
 
 variable "nat_rule_source_addresses" {
   description = "Source addresses allowed to access the HTTP DNAT rule."
   type        = list(string)
-  default     = ["*"]
 }
 
 variable "nat_rule_destination_port" {
   description = "Destination port on the Azure Firewall public IP for HTTP inbound traffic."
   type        = string
-  default     = "80"
 }
 
 variable "nat_rule_translated_port" {
   description = "Translated port on the AKS LoadBalancer service."
-  type        = number
-  default     = 80
+  type        = string
 }
 
 variable "aks_loadbalancer_ip" {
-  description = "Public IP address of the existing AKS LoadBalancer service that receives DNAT traffic."
   type        = string
+  description = "Public IP address of the existing AKS load balancer used as the translated address in the Azure Firewall DNAT rule."
 }
