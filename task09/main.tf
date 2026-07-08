@@ -71,8 +71,8 @@ resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
   protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = var.nat_rule_destination_port
-  source_address_prefix       = module.afw.azure_firewall_public_ip
-  destination_address_prefix  = var.aks_loadbalancer_ip
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
   resource_group_name         = data.azurerm_kubernetes_cluster.aks.node_resource_group
   network_security_group_name = data.azurerm_resources.aks_node_nsgs.resources[0].name
 }
