@@ -18,11 +18,6 @@ variable "aks_subnet_name" {
   type        = string
 }
 
-variable "aks_cluster_name" {
-  description = "Name of the existing AKS cluster whose node resource group contains the load balancer security group."
-  type        = string
-}
-
 variable "aks_subnet_address_prefix" {
   description = "CIDR prefix of the existing AKS subnet used as the source for firewall rules."
   type        = string
@@ -141,14 +136,4 @@ variable "nat_rule_translated_port" {
 variable "aks_loadbalancer_ip" {
   type        = string
   description = "Public IP address of the existing AKS load balancer used as the translated address in the Azure Firewall DNAT rule."
-}
-
-variable "aks_nsg_rule_name" {
-  description = "Name of the AKS node NSG rule that allows HTTP from Azure Firewall to the AKS load balancer."
-  type        = string
-}
-
-variable "aks_nsg_rule_priority" {
-  description = "Priority of the AKS node NSG rule that allows HTTP from Azure Firewall to the AKS load balancer."
-  type        = number
 }
