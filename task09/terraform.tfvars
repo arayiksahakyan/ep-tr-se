@@ -7,7 +7,7 @@ aks_subnet_name                = "aks-snet"
 aks_subnet_address_prefix      = "10.0.0.0/24"
 firewall_subnet_address_prefix = "10.0.1.0/26"
 
-aks_loadbalancer_ip = "135.237.2.211"
+aks_loadbalancer_ip = "13.92.11.66"
 
 firewall_public_ip_name = "cmtr-2gvu1fsw-mod9-pip"
 firewall_name           = "cmtr-2gvu1fsw-mod9-afw"
