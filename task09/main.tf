@@ -17,6 +17,16 @@ data "azurerm_subnet" "aks" {
   resource_group_name  = data.azurerm_resource_group.this.name
 }
 
+data "azurerm_kubernetes_cluster" "aks" {
+  name                = var.aks_cluster_name
+  resource_group_name = data.azurerm_resource_group.this.name
+}
+
+data "azurerm_resources" "aks_node_nsgs" {
+  resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
+  type                = "Microsoft.Network/networkSecurityGroups"
+}
+
 module "afw" {
   source = "./modules/afw"
 
@@ -51,4 +61,18 @@ module "afw" {
   nat_rule_destination_port    = var.nat_rule_destination_port
   nat_rule_translated_port     = var.nat_rule_translated_port
   aks_loadbalancer_ip          = var.aks_loadbalancer_ip
+}
+
+resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
+  name                        = var.aks_nsg_rule_name
+  priority                    = var.aks_nsg_rule_priority
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = var.nat_rule_destination_port
+  source_address_prefix       = module.afw.azure_firewall_public_ip
+  destination_address_prefix  = var.aks_loadbalancer_ip
+  resource_group_name         = data.azurerm_kubernetes_cluster.aks.node_resource_group
+  network_security_group_name = data.azurerm_resources.aks_node_nsgs.resources[0].name
 }

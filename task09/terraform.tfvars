@@ -4,10 +4,14 @@ resource_group_name = "cmtr-2gvu1fsw-mod9-rg"
 vnet_name           = "cmtr-2gvu1fsw-mod9-vnet"
 
 aks_subnet_name                = "aks-snet"
+aks_cluster_name               = "cmtr-2gvu1fsw-mod9-aks"
 aks_subnet_address_prefix      = "10.0.0.0/24"
 firewall_subnet_address_prefix = "10.0.1.0/26"
 
 aks_loadbalancer_ip = "13.92.11.66"
+
+aks_nsg_rule_name     = "AllowAccessFromFirewallPublicIPToLoadBalancerIP"
+aks_nsg_rule_priority = 400
 
 firewall_public_ip_name = "cmtr-2gvu1fsw-mod9-pip"
 firewall_name           = "cmtr-2gvu1fsw-mod9-afw"
