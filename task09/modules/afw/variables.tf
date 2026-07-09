@@ -63,16 +63,6 @@ variable "route_address_prefix" {
   type        = string
 }
 
-variable "azure_load_balancer_probe_route_name" {
-  description = "Name of the route that keeps Azure Load Balancer health probe traffic reachable."
-  type        = string
-}
-
-variable "azure_load_balancer_probe_address_prefix" {
-  description = "Azure platform IP address prefix used by Azure Load Balancer health probes."
-  type        = string
-}
-
 variable "application_rule_collection_name" {
   description = "Name of the Azure Firewall application rule collection."
   type        = string

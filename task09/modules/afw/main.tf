@@ -46,21 +46,12 @@ resource "azurerm_route" "default_to_firewall" {
   next_hop_in_ip_address = azurerm_firewall.this.ip_configuration[0].private_ip_address
 }
 
-resource "azurerm_route" "azure_load_balancer_probe" {
-  name                = var.azure_load_balancer_probe_route_name
-  resource_group_name = var.resource_group_name
-  route_table_name    = azurerm_route_table.aks.name
-  address_prefix      = var.azure_load_balancer_probe_address_prefix
-  next_hop_type       = "Internet"
-}
-
 resource "azurerm_subnet_route_table_association" "aks" {
   subnet_id      = var.aks_subnet_id
   route_table_id = azurerm_route_table.aks.id
 
   depends_on = [
     azurerm_route.default_to_firewall,
-    azurerm_route.azure_load_balancer_probe,
   ]
 }
 
