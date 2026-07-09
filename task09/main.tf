@@ -46,6 +46,8 @@ module "afw" {
   default_route_name   = var.default_route_name
   route_address_prefix = var.route_address_prefix
 
+  firewall_public_ip_return_route_name = var.firewall_public_ip_return_route_name
+
   application_rule_collection_name     = var.application_rule_collection_name
   application_rule_collection_priority = var.application_rule_collection_priority
   application_rule_fqdn_tags           = var.application_rule_fqdn_tags

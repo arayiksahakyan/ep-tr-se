@@ -63,6 +63,11 @@ variable "route_address_prefix" {
   type        = string
 }
 
+variable "firewall_public_ip_return_route_name" {
+  description = "Name of the route that sends return traffic to the Azure Firewall public IP through Internet."
+  type        = string
+}
+
 variable "application_rule_collection_name" {
   description = "Name of the Azure Firewall application rule collection."
   type        = string

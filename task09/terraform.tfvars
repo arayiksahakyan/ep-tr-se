@@ -23,6 +23,8 @@ route_table_name     = "cmtr-2gvu1fsw-mod9-rt"
 default_route_name   = "default-to-azure-firewall"
 route_address_prefix = "0.0.0.0/0"
 
+firewall_public_ip_return_route_name = "firewall-public-ip-return"
+
 application_rule_collection_name     = "aks-application-rules"
 application_rule_collection_priority = 100
 application_rule_fqdn_tags           = ["AzureKubernetesService"]
