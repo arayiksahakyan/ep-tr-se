@@ -88,3 +88,30 @@ resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
     module.afw,
   ]
 }
+
+resource "azurerm_network_security_rule" "allow_firewall_to_aks_subnet_nsg" {
+  for_each = local.aks_subnet_nsg_rules
+
+  name      = var.aks_nsg_rule_name
+  priority  = var.aks_nsg_rule_priority
+  direction = "Inbound"
+  access    = "Allow"
+  protocol  = "*"
+
+  source_port_range = "*"
+
+  destination_port_ranges = [
+    var.nat_rule_destination_port,
+    var.aks_node_port_range,
+  ]
+
+  source_address_prefix      = "*"
+  destination_address_prefix = "*"
+
+  resource_group_name         = each.value.rg
+  network_security_group_name = each.value.name
+
+  depends_on = [
+    module.afw,
+  ]
+}
