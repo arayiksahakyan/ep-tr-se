@@ -67,5 +67,11 @@ locals {
       destination_addresses = var.network_rule_destination_addresses
       protocols             = ["UDP"]
     }
+    aks_return_traffic = {
+      name                  = "allow-aks-return-traffic"
+      destination_ports     = ["*"]
+      destination_addresses = var.network_rule_destination_addresses
+      protocols             = ["TCP", "UDP"]
+    }
   }
 }
