@@ -64,6 +64,11 @@ module "afw" {
 }
 
 resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
+  for_each = {
+    for nsg in data.azurerm_resources.aks_node_nsgs.resources :
+    nsg.name => nsg.name
+  }
+
   name                        = var.aks_nsg_rule_name
   priority                    = var.aks_nsg_rule_priority
   direction                   = "Inbound"
@@ -74,5 +79,9 @@ resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = data.azurerm_kubernetes_cluster.aks.node_resource_group
-  network_security_group_name = data.azurerm_resources.aks_node_nsgs.resources[0].name
+  network_security_group_name = each.value
+
+  depends_on = [
+    module.afw,
+  ]
 }
