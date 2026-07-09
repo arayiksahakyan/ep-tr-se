@@ -23,6 +23,9 @@ route_table_name     = "cmtr-2gvu1fsw-mod9-rt"
 default_route_name   = "default-to-azure-firewall"
 route_address_prefix = "0.0.0.0/0"
 
+azure_load_balancer_probe_route_name     = "azure-load-balancer-health-probe"
+azure_load_balancer_probe_address_prefix = "168.63.129.16/32"
+
 application_rule_collection_name     = "aks-application-rules"
 application_rule_collection_priority = 100
 application_rule_fqdn_tags           = ["AzureKubernetesService"]

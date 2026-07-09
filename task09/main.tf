@@ -46,6 +46,9 @@ module "afw" {
   default_route_name   = var.default_route_name
   route_address_prefix = var.route_address_prefix
 
+  azure_load_balancer_probe_route_name     = var.azure_load_balancer_probe_route_name
+  azure_load_balancer_probe_address_prefix = var.azure_load_balancer_probe_address_prefix
+
   application_rule_collection_name     = var.application_rule_collection_name
   application_rule_collection_priority = var.application_rule_collection_priority
   application_rule_fqdn_tags           = var.application_rule_fqdn_tags
