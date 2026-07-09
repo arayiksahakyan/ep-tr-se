@@ -101,6 +101,14 @@ resource "azurerm_firewall_network_rule_collection" "aks" {
       protocols             = rule.value.protocols
     }
   }
+
+  rule {
+    name                  = "allow-http-to-aks-loadbalancer"
+    source_addresses      = var.nat_rule_source_addresses
+    destination_ports     = [var.nat_rule_destination_port]
+    destination_addresses = [var.aks_loadbalancer_ip]
+    protocols             = ["TCP"]
+  }
 }
 
 resource "azurerm_firewall_nat_rule_collection" "aks_http" {
