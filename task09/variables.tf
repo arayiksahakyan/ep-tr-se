@@ -143,6 +143,11 @@ variable "aks_loadbalancer_ip" {
   description = "Public IP address of the existing AKS load balancer used as the translated address in the Azure Firewall DNAT rule."
 }
 
+variable "aks_node_port_range" {
+  description = "Kubernetes NodePort port range used by AKS LoadBalancer backend and health probe traffic."
+  type        = string
+}
+
 variable "aks_nsg_rule_name" {
   description = "Name of the AKS node NSG rule that allows HTTP access from Azure Firewall public IP to the AKS load balancer IP."
   type        = string

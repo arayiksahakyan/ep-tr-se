@@ -69,13 +69,16 @@ resource "azurerm_network_security_rule" "allow_firewall_to_aks_loadbalancer" {
     nsg.name => nsg.name
   }
 
-  name                        = var.aks_nsg_rule_name
-  priority                    = var.aks_nsg_rule_priority
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "*"
-  source_port_range           = "*"
-  destination_port_range      = var.nat_rule_destination_port
+  name              = var.aks_nsg_rule_name
+  priority          = var.aks_nsg_rule_priority
+  direction         = "Inbound"
+  access            = "Allow"
+  protocol          = "*"
+  source_port_range = "*"
+  destination_port_ranges = [
+    var.nat_rule_destination_port,
+    var.aks_node_port_range,
+  ]
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = data.azurerm_kubernetes_cluster.aks.node_resource_group

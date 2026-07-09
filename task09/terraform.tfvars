@@ -10,6 +10,7 @@ firewall_subnet_address_prefix = "10.0.1.0/26"
 
 aks_loadbalancer_ip = "20.237.16.20"
 
+aks_node_port_range   = "30000-32767"
 aks_nsg_rule_name     = "AllowAccessFromFirewallPublicIPToLoadBalancerIP"
 aks_nsg_rule_priority = 400
 
